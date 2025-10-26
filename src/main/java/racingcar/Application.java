@@ -13,9 +13,9 @@ public class Application {
         System.out.println("시도할 횟수는 몇 회인가요?");
         int n = Integer.parseInt(Console.readLine());
 
-        List<Car> cars = carRacing.startCarRacing(carNames, n);
+        String winner = carRacing.startCarRacing(carNames, n);
 
-        System.out.println("최종 우승자 : " + cars);
+        System.out.println("최종 우승자 : " + winner);
 
     }
 }

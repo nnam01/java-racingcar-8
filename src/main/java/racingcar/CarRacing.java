@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CarRacing {
 
-    public List<Car> startCarRacing(String carNames, int n) {
+    public String startCarRacing(String carNames, int n) {
         List<Car> cars = setCars(carNames);
 
         for (int i = 0; i < n; i++) {
@@ -39,7 +39,7 @@ public class CarRacing {
         return cars;
     }
 
-    public List<Car> findWinner(List<Car> cars) {
+    public String findWinner(List<Car> cars) {
 
         int maxDistance = 0;
         for (Car car : cars) {
@@ -48,13 +48,13 @@ public class CarRacing {
             }
         }
 
-        List<Car> winner = new ArrayList<>();
+        List<String> winnerList = new ArrayList<>();
         for (Car car : cars) {
             if (car.getMovingForward() == maxDistance) {
-                winner.add(car);
+                winnerList.add(car.getName());
             }
         }
-        return winner;
-    }
 
+        return String.join(", ", winnerList);
+    }
 }
