@@ -1,5 +1,6 @@
 package racingcar;
 
+import camp.nextstep.edu.missionutils.Randoms;
 
 public class Car {
 
@@ -31,5 +32,12 @@ public class Car {
 
     public void moveForward() {
         this.movingForward++;
+    }
+
+    public void tryMoveForward() {
+        int randomNum = Randoms.pickNumberInRange(0, 9);
+        if (randomNum > 3) {
+            this.moveForward();
+        }
     }
 }
