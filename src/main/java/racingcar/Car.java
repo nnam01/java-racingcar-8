@@ -40,4 +40,8 @@ public class Car {
             this.moveForward();
         }
     }
+
+    public int getMovingForward() {
+        return this.movingForward;
+    }
 }
