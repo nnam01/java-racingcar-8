@@ -1,7 +1,9 @@
 package racingcar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CarRacing {
 
@@ -17,43 +19,27 @@ public class CarRacing {
     }
 
     public void runOneCycle(List<Car> cars) {
-        for (Car car : cars) {
-            car.tryMoveForward();
-        }
+        cars.forEach(Car::tryMoveForward);
     }
 
     public void printRacingStatus(List<Car> cars) {
-        for (Car car : cars) {
-            System.out.println(car.toString());
-        }
+        cars.stream().map(Car::toString).forEach(System.out::println);
         System.out.println();
     }
 
     public List<Car> setCars(String carNames) {
-        List<Car> cars = new ArrayList<>();
-
+        ArrayList<Car> cars;
         String[] carNamesArray = carNames.split(",");
-        for (String s : carNamesArray) {
-            cars.add(new Car(s));
-        }
+        cars = Arrays.stream(carNamesArray).map(Car::new).collect(Collectors.toCollection(ArrayList::new));
         return cars;
     }
 
     public String findWinner(List<Car> cars) {
 
-        int maxDistance = 0;
-        for (Car car : cars) {
-            if (car.getMovingForward() > maxDistance) {
-                maxDistance = car.getMovingForward();
-            }
-        }
+        int maxDistance = cars.stream().mapToInt(Car::getMovingForward).filter(car -> car >= 0).max().orElse(0);
 
-        List<String> winnerList = new ArrayList<>();
-        for (Car car : cars) {
-            if (car.getMovingForward() == maxDistance) {
-                winnerList.add(car.getName());
-            }
-        }
+        List<String> winnerList = cars.stream().filter(car -> car.getMovingForward() == maxDistance).map(Car::getName)
+                .collect(Collectors.toList());
 
         return String.join(", ", winnerList);
     }
