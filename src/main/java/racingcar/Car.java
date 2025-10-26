@@ -11,7 +11,7 @@ public class Car {
 
     public Car(String name) {
         if (name.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException( name+ ": 이름은 5글자 이하여야 합니다.(구분자는 쉼표를 사용해야합니다.)");
         }
         this.name = name;
         this.movingForward = 0;
